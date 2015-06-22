@@ -65,9 +65,3 @@ class UK:
             return False
         else:
             return True
-
-start_date = datetime.datetime.strptime('20-04-2015', '%d-%m-%Y')
-France().is_holiday(start_date)
-Germany().is_holiday(start_date)
-UK().is_holiday(start_date)
-print(France().get_zones(start_date))
