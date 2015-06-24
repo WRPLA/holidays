@@ -7,6 +7,5 @@ setup(name='usefulholidays',
       author='brios',
       license='T4T-Rios',
       packages=['usefulholidays'],
+      package_data={'usefulholidays': ['*.db']},
       zip_safe=False)
-shutil.move('/usr/local/lib/python3.4/site-packages/usefulholidays-0.1-py3.4.egg/usefulholidays',
-          '/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages')
