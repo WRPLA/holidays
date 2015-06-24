@@ -15,7 +15,6 @@ class France:
                                                 Holidays.end_date >= date)\
             .all()
         if len(res) == 0:
-            print('no holidays')
             return False
         else:
             return True
@@ -42,7 +41,6 @@ class Germany:
                                                 Holidays.end_date >= date)\
             .all()
         if len(res) == 0:
-            print('no holidays')
             return False
         else:
             return True
@@ -60,7 +58,11 @@ class UK:
                                                 Holidays.end_date >= date)\
             .all()
         if len(res) == 0:
-            print('no holidays')
             return False
         else:
             return True
+
+
+def get_all_countries():
+    countries = db.session.query(Countries.name).all()
+    return countries
