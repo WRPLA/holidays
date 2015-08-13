@@ -66,3 +66,11 @@ class UK:
 def get_all_countries():
     countries = db.session.query(Countries.name).all()
     return countries
+
+
+def get_countries_in_holidays(date):
+    countries = db.session.query(Countries.name).distinct(Countries.name).filter(Holidays.start_date <= date,
+                                                        Holidays.end_date >= date,
+                                                        Countries.id == Holidays.country_id)\
+            .all()
+    return countries

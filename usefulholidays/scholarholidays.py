@@ -7,7 +7,7 @@ Base = declarative_base()
 metadata = Base.metadata
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/usefulholidays.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usefulholidays.db'
 db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
