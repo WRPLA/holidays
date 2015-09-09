@@ -1,12 +1,25 @@
 __author__ = 'baptiste'
 from usefulholidays.scholarholidays import *
+from sqlalchemy import or_
+import datetime
 session = db.session()
-
 
 class France:
 
     def __init__(self):
         self.name = 'France'
+
+    def is_day_off(self, date):
+        res = db.session.query(Holidays).filter(Countries.name == self.name,
+                                                Countries.id == Holidays.country_id,
+                                                Holidays.start_date == date.strftime('%Y-%m-%d %H:%M:%S.%f'),
+                                                or_(Holidays.name == 'day-off',
+                                                Holidays.name == 'day-off-wdaysensitive'))\
+            .all()
+        if len(res) == 0:
+            return False
+        else:
+            return True
 
     def is_holiday(self, date):
         res = db.session.query(Holidays).filter(Countries.name == self.name,
@@ -33,6 +46,23 @@ class Germany:
 
     def __init__(self):
         self.name = 'Germany'
+
+    def is_holiday(self, date):
+        res = db.session.query(Holidays).filter(Countries.name == self.name,
+                                                Countries.id == Holidays.country_id,
+                                                Holidays.start_date <= date,
+                                                Holidays.end_date >= date)\
+            .all()
+        if len(res) == 0:
+            return False
+        else:
+            return True
+
+
+class Belgium:
+
+    def __init__(self):
+        self.name = 'Belgium'
 
     def is_holiday(self, date):
         res = db.session.query(Holidays).filter(Countries.name == self.name,
