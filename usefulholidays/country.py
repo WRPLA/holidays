@@ -41,6 +41,27 @@ class France:
             .all()
         return res
 
+    def get_zone_and_name(self, date):
+        """
+
+        :param date: a datetime.date()
+        :return: returns a list of zone and the corresponding holiday name within a list.
+        """
+        q = db.session.query(Holidays.zone, Holidays.name).filter(Countries.name == self.name,
+                                                                  Countries.id == Holidays.country_id,
+                                                                  Holidays.start_date <= date,
+                                                                  Holidays.end_date >= date,
+                                                                  Holidays.zone != self.name)\
+            .all()
+        res = []
+        for zone, hol in q:
+            if hol == 'winter' or hol == 'spring':
+                res.append(zone.replace(' ','_') + '_' + hol)
+            else:
+                res.append(hol)
+                return res
+        return res
+
 
 class Germany:
 
@@ -104,3 +125,7 @@ def get_countries_in_holidays(date):
                                                         Countries.id == Holidays.country_id)\
             .all()
     return countries
+
+print(datetime.date(2014,5,27), France().get_zone_and_name(datetime.date(2014,5,27)))
+print(datetime.date(2015,2,26), France().get_zone_and_name(datetime.date(2015,2,26)))
+print(datetime.date(2015,12,26), France().get_zone_and_name(datetime.date(2015,12,26)))
