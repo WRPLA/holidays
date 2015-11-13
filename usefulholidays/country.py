@@ -125,7 +125,3 @@ def get_countries_in_holidays(date):
                                                         Countries.id == Holidays.country_id)\
             .all()
     return countries
-
-print(datetime.date(2014,5,27), France().get_zone_and_name(datetime.date(2014,5,27)))
-print(datetime.date(2015,2,26), France().get_zone_and_name(datetime.date(2015,2,26)))
-print(datetime.date(2015,12,26), France().get_zone_and_name(datetime.date(2015,12,26)))
