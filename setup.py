@@ -2,9 +2,9 @@ from setuptools import setup
 from pip.req import parse_requirements
 import shutil
 
-install_reqs = parse_requirements('usefulholidays/requirements.txt')
-reqs = [str(ir.req) for ir in install_reqs]
-setup(install_requires = reqs,
+with open('usefulholidays/requirements.txt') as f:
+    required = f.read().splitlines()
+setup(install_requires = required,
       name='usefulholidays',
       version='0.1',
       description='The disrupting package to check the school calendar :) ',
